@@ -1,16 +1,13 @@
 (function(){
   "use strict";
   var expect  = require('chai').expect,
-  sut = require('../lib/malyshev.js');
+      sut = require('../lib/malyshev.js'),
+      sinon = require("sinon");
 
   describe('Factory', function(){
     describe("public API", function(){
       it("define should be a function", function(){
         expect(typeof sut.define).to.equal("function");
-      });
-
-      it("factories should be a object", function(){
-        expect(typeof sut.factories).to.equal("object");
       });
 
       it("build be a function", function(){
@@ -19,6 +16,18 @@
 
       it("attributesFor be a function", function(){
         expect(typeof sut.attributesFor).to.equal("function");
+      });
+
+      it("sequence should be a function", function(){
+        expect(typeof sut.sequence).to.equal("function");
+      });
+
+      it("factories should be a object", function(){
+        expect(typeof sut.factories).to.equal("object");
+      });
+
+      it("sequences should be a object", function(){
+        expect(typeof sut.sequences).to.equal("object");
       });
     });
 
@@ -152,9 +161,26 @@
       });
     });
 
-    xdescribe('#sequence', function(){
-      it("should be a function", function(){
-        expect(typeof sut.sequence).to.equal("function");
+    describe('#sequence', function(){
+      describe("define a sequence", function(){
+        var fun = sinon.spy(function(n){return "email" + n +"@gmail.com";});
+
+        beforeEach(function(){
+          sut.sequence("email", fun);
+        });
+
+        it("should add a sequence to sequences", function(){
+          expect(typeof sut.sequences.email).to.equal("function");
+        });
+
+        it("should mark the function as malyshev sequence", function(){
+          expect(sut.sequences.email.isMalyshevSequence).to.equal(true);
+        });
+
+        it("should generate a sequence", function(){
+          expect(sut.sequences.email()).to.equal("email1@gmail.com");
+          expect(sut.sequences.email()).to.equal("email2@gmail.com");
+        });
       });
     });
 
