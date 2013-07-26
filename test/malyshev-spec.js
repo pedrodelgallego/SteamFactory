@@ -65,8 +65,8 @@
       });
 
       describe("pass array of factory references", function(){
-        var user   = sut.define("user", {name: "pedro"});
-        var states = sut.define("confirmedUser", {confirmed: true});
+        sut.define("user", {name: "pedro"});
+        sut.define("confirmedUser", {confirmed: true});
 
         beforeEach(function(){
           sut.define("validUser", ["user", "confirmedUser"]);
