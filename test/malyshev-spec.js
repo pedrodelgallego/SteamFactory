@@ -1,8 +1,7 @@
 (function(){
   "use strict";
   var expect  = require('chai').expect,
-      sut = require('../lib/malyshev.js');
-
+  sut = require('../lib/malyshev.js');
 
   describe('Factory', function(){
     describe("public API", function(){
@@ -38,7 +37,7 @@
         });
       });
 
-      describe("pass array of statues", function(){
+      describe("pass array of states", function(){
         var states = [{name:"pedro"}, {surname: "Del Gallego"}];
         beforeEach(function(){
           sut.define("user", states);
@@ -54,7 +53,7 @@
         });
       });
 
-      describe("pass array of statues", function(){
+      describe("pass array of states", function(){
         it("should be a preserve the status if the function is on the behind an object", function(){
           var states = [function(){return {type: "user"};}, {name:"pedro"} ];
           sut.define("user", states);
@@ -93,12 +92,53 @@
       });
     });
 
-    describe('.factories', function(){
-
-    });
-
     describe('#build', function(){
+      describe("pass a no arguments", function(){
+        beforeEach(function(){
+          sut.define("user", {name:"pedro"});
+        });
 
+        it("should return an object with the defualt values", function(){
+          var user = sut.build("user");
+          expect(user.name).to.equal("pedro");
+        });
+      });
+
+      describe("pass an object", function(){
+        beforeEach(function(){
+          sut.define("user", {name:"pedro", lastName: "del gallego"});
+        });
+
+        it("should return an object with the defualt values, except the common with the objects", function(){
+          var user = sut.build("user", {lastName: "andersen"});
+          expect(user.name).to.equal("pedro");
+          expect(user.lastName).to.equal("andersen");
+        });
+      });
+
+      describe("pass array of states", function(){
+        it("should be a preserve the status if the function is on the behind an object", function(){
+          var states = [function(){return {type: "user"};}, {name:"pedro"} ];
+          var user = sut.build("user", states);
+          expect(user.name).to.equal("pedro");
+          expect(user.type).to.equal("user");
+        });
+
+        it("should preserve the status if the function is on the behind an object", function(){
+          var states = [{name:"pedro"}, function(){return {type: "user"};}];
+          var user = sut.build("user", states);
+          expect(user.type).to.equal("user");
+          expect(user.name).to.equal("pedro");
+        });
+
+        it("should preserve the status when a constructor is used", function(){
+          var User = function(){ this.type = "user";};
+          var states = [{name:"pedro"}, new User()];
+          var user = sut.build("user", states);
+          expect(user.type).to.equal("user");
+          expect(user.name).to.equal("pedro");
+        });
+      });
     });
 
     describe('#attributesFor', function(){
