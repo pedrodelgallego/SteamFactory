@@ -3,13 +3,27 @@
   var expect  = require('chai').expect,
       sut = require('../lib/malyshev.js');
 
-  it("should be a function", function(){expect(typeof sut.define).to.equal("function");});
-  it("should be a object",   function(){ expect(typeof sut.factories).to.equal("object");});
-  it("should be a function", function(){expect(typeof sut.build).to.equal("function");});
 
   describe('Factory', function(){
-    describe('#define', function(){
+    describe("public API", function(){
+      it("define should be a function", function(){
+        expect(typeof sut.define).to.equal("function");
+      });
 
+      it("factories should be a object", function(){
+        expect(typeof sut.factories).to.equal("object");
+      });
+
+      it("build be a function", function(){
+        expect(typeof sut.build).to.equal("function");
+      });
+
+      it("attributesFor be a function", function(){
+        expect(typeof sut.attributesFor).to.equal("function");
+      });
+    });
+
+    describe('#define', function(){
       describe("pass a simple object", function(){
         beforeEach(function(){
           sut.define("user", {name:"pedro"});
@@ -87,9 +101,14 @@
 
     });
 
-    xdescribe('#attributesFor', function(){
-      it("should be a function", function(){
-        expect(typeof sut.attributesFor).to.equal("function");
+    describe('#attributesFor', function(){
+      sut.define("user", {name: "pedro"});
+      sut.define("confirmedUser", {confirmed: true});
+      sut.define("validUser", ["user", "confirmedUser"]);
+
+      it("should be a preserve the status if the function is on the behind an object", function(){
+        expect(sut.attributesFor("validUser").name).to.equal("pedro");
+        expect(sut.attributesFor("validUser").confirmed).to.equal(true);
       });
     });
 
