@@ -182,6 +182,46 @@
           expect(sut.sequences.email()).to.equal("email2@gmail.com");
         });
       });
+
+      describe("adding a sequence using define", function(){
+        it("should not call the sequence in the define phase", function(){
+          var fun = sinon.spy(function(n){ return "email" + n +"@gmail.com"; });
+          fun.isMalyshevSequence = true;
+          sut.define("user", {name: "pedro", email: fun});
+
+          expect(fun.called).to.equal(false);
+        });
+
+      });
+
+      describe("building a model using that include a sequence ", function(){
+        var fun = function(n){ return "email" + n +"@gmail.com"; },
+            generator,
+            user;
+
+        beforeEach(function(){
+          sut.sequence("email", fun);
+          generator = sinon.spy(sut.sequences.email);
+
+          sut.define("user", {name: "pedro", email: generator});
+        });
+
+        it("should call the sequence in the build phase", function(){
+          sut.build("user");
+          expect(generator.calledOnce).to.equal(true);
+
+          sut.build("user");
+          expect(generator.calledTwice).to.equal(true);
+        });
+
+        it("should set the property to the generated value", function(){
+          user = sut.build("user");
+          expect(user.email).to.equal("email1@gmail.com");
+
+          user = sut.build("user");
+          expect(user.email).to.equal("email2@gmail.com");
+        });
+      });
     });
 
   });

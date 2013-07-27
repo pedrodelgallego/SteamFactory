@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     mochaTest: {
       test: {
-        options: { reporter: 'spec', growl: true },
+        options: { reporter: 'dot', growl: true },
         src: ['test/**/*.js']
       }
     },
