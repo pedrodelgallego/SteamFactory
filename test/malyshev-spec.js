@@ -10,6 +10,10 @@
         expect(typeof sut.define).to.equal("function");
       });
 
+      it("alias should be a function", function(){
+        expect(typeof sut.define).to.equal("function");
+      });
+
       it("build be a function", function(){
         expect(typeof sut.build).to.equal("function");
       });
@@ -98,6 +102,23 @@
           expect(sut.factories.validUser.name).to.equal("pedro");
           expect(sut.factories.validUser.confirmed).to.equal(true);
         });
+      });
+    });
+
+    describe('#alias', function(){
+      beforeEach(function(){
+        sut.define("user", {name: "pedro"});
+      });
+
+      it("should create an alias when passing a string", function(){
+        sut.alias("user", "author");
+        expect(sut.factories.user).to.equal(sut.factories.author);
+      });
+
+      it("should create an alias when passing a string", function(){
+        sut.alias("user", ["author", "commenter"]);
+        expect(sut.factories.author).to.equal(sut.factories.author);
+        expect(sut.factories.user).to.equal(sut.factories.commenter);
       });
     });
 
