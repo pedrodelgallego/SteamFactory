@@ -202,6 +202,12 @@
           expect(sut.sequences.email()).to.equal("email1@gmail.com");
           expect(sut.sequences.email()).to.equal("email2@gmail.com");
         });
+
+        it("should be able to overwrite the initial value", function(){
+          sut.sequence("email", fun, 100);
+
+          expect(sut.sequences.email()).to.equal("email100@gmail.com");
+        });
       });
 
       describe("adding a sequence using define", function(){
