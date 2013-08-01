@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha"
   },
-  "repository": "",
+  "repository": "https://github.com/pedrodelgallego/SteamFactory",
   "keywords": [
     "factory",
     "factory_girl",
