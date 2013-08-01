@@ -1,7 +1,7 @@
 (function(){
   "use strict";
   var expect  = require('chai').expect,
-      sut = require('../lib/malyshev.js'),
+      sut = require('../lib/steam-factory.js'),
       sinon = require("sinon");
 
   describe('Factory', function(){
@@ -210,7 +210,7 @@
         });
 
         it("marks the function as malyshev sequence", function(){
-          expect(sut.sequences.email.isMalyshevSequence).to.equal(true);
+          expect(sut.sequences.email.isSteamFactorySequence).to.equal(true);
         });
 
         it("generates a sequence of unique values", function(){
@@ -227,7 +227,7 @@
       describe("adding a sequence using define", function(){
         it("should not call the sequence in the define phase", function(){
           var fun = sinon.spy(function(n){ return "email" + n +"@gmail.com"; });
-          fun.isMalyshevSequence = true;
+          fun.isSteamFactorySequence = true;
           sut.define("user", {name: "pedro", email: fun});
 
           expect(fun.called).to.equal(false);

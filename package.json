@@ -1,8 +1,8 @@
 {
-  "name": "malyshev",
-  "version": "0.0.0",
+  "name": "SteamFactory",
+  "version": "0.0.1",
   "description": "factory for building JavaScript objects, mostly useful for setting up test data.",
-  "main": "src/malyshev.js",
+  "main": "lib/steam-factory.js",
   "scripts": {
     "test": "mocha"
   },
@@ -11,7 +11,10 @@
     "factory",
     "factory_girl",
     "testing",
-    "helper"
+    "helper",
+    "steam factory",
+    "steamfactory",
+    "factories"
   ],
   "author": "Pedro Del Gallego",
   "license": "BSD",
@@ -22,12 +25,8 @@
     "grunt-contrib-jshint": "~0.3.0",
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.1",
-    "esprima": "~1.0.3",
-    "istanbul": "~0.1.37",
     "bower": "~0.9.2",
-    "grunt-complexity": "~0.1.3",
     "complexity-report": "~0.10.3",
-    "grunt-plato": "~0.2.0",
     "mocha": "~1.11.0",
     "grunt-mocha-test": "~0.5.0",
     "grunt-contrib-watch": "~0.4.4",
