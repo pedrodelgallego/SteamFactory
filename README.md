@@ -67,11 +67,7 @@ user = SteamFactory.build("user")
 // Returns a hash of attributes that can be used to build a User instance
 attrs = SteamFactory.attributes_for("user")
 
-// Returns an object with all defined attributes stubbed out
-# Not implemented yet
-// stub = SteamFactory.build_stubbed(:user)
-
-# Passing a function to any of the methods above will yield the return object
+// Passing a function to any of the methods above will yield the return object
 SteamFactory.build("user", function(user){
   User.Save();
 }
@@ -263,7 +259,7 @@ Composition allow you to group attributes together and then apply them
 to any factory.
 
 ```javascript
-Factory.alias("user", "author);
+Factory.alias("user", "author");
 Factory.define("published", {published: true});
 Factory.define("unpublished", {published: true});
 Factory.define("weekLongPublishing", {
@@ -287,8 +283,8 @@ Factory.define("monthLongPublishedStory",  ["published", "monthLongPublishedStor
 
 Factory.define("weekLongUnpublishedStory",  ["unpublished", "weekLongPublishing"]);
 Factory.define("monthLongUnpublishedStory", ["unpublished", "monthLongPublishedStory"]);
-
 ```
+
 Composition that define the same attributes won't raise AttributeDefinitionErrors;
 
 Building or Creating Multiple Records (WIP)
