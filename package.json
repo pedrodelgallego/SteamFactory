@@ -1,6 +1,6 @@
 {
   "name": "steam-factory",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "factory for building JavaScript objects, mostly useful for setting up test data.",
   "main": "lib/steam-factory.js",
   "scripts": {
