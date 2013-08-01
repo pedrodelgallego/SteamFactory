@@ -1,5 +1,5 @@
 {
-  "name": "SteamFactory",
+  "name": "steam-factory",
   "version": "0.0.1",
   "description": "factory for building JavaScript objects, mostly useful for setting up test data.",
   "main": "lib/steam-factory.js",
