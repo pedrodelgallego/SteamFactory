@@ -180,6 +180,7 @@ of generating associated data.
 
 Factory.define("post", {title: "Through the Looking Glass"});
 Factory.define("user", {name "John Doe"});
+
 Factory.define("userWithPost", ["user", function(user){
     // userWithPost will create post data after the user has been created
     // the functions yields one value the user instance itself
@@ -265,7 +266,7 @@ Factory.define("unpublished", {published: true});
 Factory.define("weekLongPublishing", {
     startAt:  Factory.generate("aWeekAgo"),
     endAt:    Factory.generate("now")
-})
+});
 
 Factory.define("weekLongPublishing", {
     startAt:  Factory.generate("aMonthAgo"),
@@ -278,7 +279,7 @@ Factory.define("story", {
 });
 
 // Define factories by reusing other factories
-Factory.define("weekLongPublishedStory,    ["published", "weekLongPublishing"]);
+Factory.define("weekLongPublishedStory",    ["published", "weekLongPublishing"]);
 Factory.define("monthLongPublishedStory",  ["published", "monthLongPublishedStory"]);
 
 Factory.define("weekLongUnpublishedStory",  ["unpublished", "weekLongPublishing"]);
