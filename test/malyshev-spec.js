@@ -177,13 +177,12 @@
           expect(user.name).to.equal("pedro");
         });
 
-
-        // it("pass the instance to the anonymous function", function(){
-        //   var setType = function(user){ user.type = "user";};
-        //   sut.define("user");
-        //   sut.build("user", setType);
-        //   expect(sut.factories.user.type).to.equal("user");
-        // });
+        it("pass the instance to anonymous function", function(){
+          var User = function(user){ user.type = "user";};
+          var states = [User];
+          var user = sut.build("user", states);
+          expect(user.type).to.equal("user");
+        });
       });
     });
 
