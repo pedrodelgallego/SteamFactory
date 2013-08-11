@@ -303,3 +303,8 @@ To set the attributes for each of the factories, you can pass in a hash as you n
 ```javascript
 twenty_year_olds = SteamFactory.build_list(:user, 25, date_of_birth: 20.years.ago)
 ```
+
+Acknowledge
+-----------
+
+This module is inspired by the great gem FactoryGirl by ThoughtBot.
