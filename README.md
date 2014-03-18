@@ -9,8 +9,7 @@ If you're using Node, you'll want to install using npm:
 ```javascript
 npm install steam-factory --save-dev
 ```
-Once your node_module will need to require it.
-
+You will need to instanciate the factory before using it.
 ```javascript
 var Factory = require("steam-factory");
 ```
@@ -58,14 +57,14 @@ Factories can be defined anywhere
 Using factories
 ---------------
 
-SteamFactory supports several different build strategies: build, create, attributes\_for and build\_stubbed:
+SteamFactory supports several different build strategies: build, create, and attributesFor.
 
 ```javascript
 // Returns a User instance that's not saved
 user = SteamFactory.build("user")
 
 // Returns a hash of attributes that can be used to build a User instance
-attrs = SteamFactory.attributes_for("user")
+attrs = SteamFactory.attributesFor("user")
 
 // Passing a function to any of the methods above will yield the return object
 SteamFactory.build("user", function(user){
@@ -77,8 +76,8 @@ it's possible to override the defined attributes by passing an object, or an arr
 
 ```javascript
 // Build a User instance and override the firstName property
-user = SteamFactory.build(:user, {firstName: "John"})
-User.FirstName
+user = SteamFactory.build("user", {firstName: "John"})
+user.FirstName
 // => "John"
 ```
 
@@ -133,7 +132,7 @@ Factory.define("user",{
   lastName:  "Doe",
 });
 
-Factory.alias("user", [:author, :commenter]);
+Factory.alias("user", ["author", "commenter"]);
 
 Factory.define("post",{
   author: Factory.build("author"),
@@ -287,24 +286,3 @@ Factory.define("monthLongUnpublishedStory", ["unpublished", "monthLongPublishedS
 ```
 
 Composition that define the same attributes won't raise AttributeDefinitionErrors;
-
-Building or Creating Multiple Records (WIP)
--------------------------------------
-
-Sometimes, you'll want to create or build multiple instances of a factory at once.
-
-```javascript
-built_users   = SteamFactory.build_list("user", 25)
-```
-
-These methods will build or create a specific amount of factories and return them as an array.
-To set the attributes for each of the factories, you can pass in a hash as you normally would.
-
-```javascript
-twenty_year_olds = SteamFactory.build_list(:user, 25, date_of_birth: 20.years.ago)
-```
-
-Acknowledge
------------
-
-This module is inspired by the great gem FactoryGirl by ThoughtBot.
