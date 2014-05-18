@@ -22,7 +22,7 @@ If you're not using npm, be sure to load Steam Factory into your enviroment.
 Once Required, assuming you have a directory structure of `spec/factories` or `test/factories`, all you'll need load your factories definitions
 
 ```javascript
-var Factory = require('SteamFactory');
+var Factory = require('steam-factory');
 
 Factory.sequence("userId", function(n) {
   return n;
